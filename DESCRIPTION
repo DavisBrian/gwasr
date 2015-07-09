@@ -1,0 +1,16 @@
+Package: gwasr
+Title: Provide a framework to make GWAS easier.
+Version: 0.0.0.9000
+Authors@R: person("Brian", "Davis", email = "brian.davis281@gmail.com", role = c("aut", "cre"))
+Description: A framework to make GWAS easier and more consistant.  It creates 
+    classes and functions to make common tasks standardized.
+Depends: 
+    R (>= 3.1.0)
+License: GPL (>= 2)
+LazyData: true
+Maintainer: Brian Davis <Brian.Davis281@gmail.com>
+URL: https://github.com/DavisBrian/gwasr
+BugReports: https://github.com/DavisBrian/gwasr/issues
+Suggests: knitr,
+    testthat
+VignetteBuilder: knitr
