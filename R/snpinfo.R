@@ -109,7 +109,7 @@ snpinfo <- function(data, snpNames="Name", aggregateBy="gene", chr=NULL, pos=NUL
   
 
 #   data <- as_data_frame(unique(data.frame(data[, cn, drop=FALSE], .keep=keep)))
-#   new_class <- class(data)
+   new_class <- class(data)
   
   structure(
     data,
