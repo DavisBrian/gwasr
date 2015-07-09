@@ -61,10 +61,11 @@
 #' @export
 #
 # [TBD]
+#  -verbose option?
 #  -add genderChar??? something to demote which character is "MALE/FEMALE"
 #  -add "family" (gaussian/binomial/survival)
 #  -add print method to show the meta data
-phenotype <- function(data, formula=NULL, id=NULL, gender=NULL, include=NULL, exclude=NULL) {
+phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL, include=NULL, exclude=NULL) {
   
   if(is.data.frame(data)) {
     old_class <- class(data)
@@ -72,6 +73,35 @@ phenotype <- function(data, formula=NULL, id=NULL, gender=NULL, include=NULL, ex
   } else {
     stop("data must be a data.frame or a class which extends a data.frame.")
   }
+  
+  # [TBD] check column names are in data
+  
+  # [TBD] check formula
+  #        - make sure all varaibles are in the data frame
+  #        - make sure after na.omit there are rows
+  #        - make sure a basic model.frame can be made ???
+  
+  # [TBD] check family
+  #        - if "gaussian" response is_numeric
+  #        - if "binomial" response is_dicotomous
+  #        - if "survival" ???
+  
+  # [TBD] check check id
+  #        - if not given make the rownames a column
+  #        - make sure they are characters
+  #        - make sure they are unique
+  #        - set idCol
+  
+  # [TBD] check check gender
+  #        - is a type than can be grouped
+  #        - has no more than 2 groups
+  #        - can be converted to TRUE/FALSE??
+  
+  # [TBD] check check include
+  #        - the subjects are in the dataset
+
+  # [TBD] check check exclude
+  #        - the subjects are in the dataset
   
   # include / exclude    
   
