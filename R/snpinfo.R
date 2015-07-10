@@ -55,7 +55,7 @@
 #' @export
 snpinfo <- function(data, snpNames="Name", aggregateBy="gene", chr=NULL, pos=NULL, ref=NULL, alt=NULL, filterBy=NULL, filterFun=NULL, otherCols=NULL) {
   
-  if(is.data.frame(data)) {
+  if (is.data.frame(data)) {
     old_class <- class(data)
     old_attributes <- attributes(data)
   } else {
