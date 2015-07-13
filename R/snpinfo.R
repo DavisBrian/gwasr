@@ -106,15 +106,15 @@ snpinfo <- function(data, snpNames="Name", aggregateBy="gene", chr=NULL, pos=NUL
   #       - warn if NA are set to FALSE
   #       - if all NA stop
   
+  # [TBD] Drop columns not specified
   
-
 #   data <- as_data_frame(unique(data.frame(data[, cn, drop=FALSE], .keep=keep)))
    new_class <- class(data)
   
   structure(
     data,
-    snpNames = snpNames,
-    aggregateBy = aggregateBy,
+    snpNamesCol = snpNames,
+    aggregateByCol = aggregateBy,
     chrCol = chr,
     posCol = pos,
     refCol = ref,
@@ -122,3 +122,20 @@ snpinfo <- function(data, snpNames="Name", aggregateBy="gene", chr=NULL, pos=NUL
     class = c("snpinfo", new_class)
   )
 }
+
+#' @rdname snpinfo
+#' @export
+is_snpinfo <- function(x) inherits(x, "snpinfo")
+
+# metadata  functions  --------------------------------------------------------
+
+# get functions
+#' @export
+get_snps.snpinfo <- function(x, ...) unique(x[[attr(x, "snpNamesCol")]])
+
+#' @export
+get_aggregateBy <- function(x, ...) unique(x[[attr(x, "aggregateByCol")]])
+
+#' @export
+get_chr <- function(x, ...) unique(x[[attr(x, "chrCol")]])
+

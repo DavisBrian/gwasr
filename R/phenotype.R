@@ -136,3 +136,24 @@ phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL, inc
     class = c("phenotype", new_class)
   )
 }
+
+#' @rdname phenotype
+#' @export
+is_phenotype <- function(x) inherits(x, "phenotype")
+
+
+# metadata  functions  --------------------------------------------------------
+
+# get functions
+#' @export
+get_subjects.phenotype <- function(x, excluded = FALSE) {
+  # [TBD] check exlude is  a logical of length 1
+  stopifnot(length(excluded) == 1L)
+  if (excluded) {
+    attr(x, "excluded")
+  } else {
+    intersect(x[[attr(x, "idCol")]], attr(x, "included"))
+  }
+}
+
+

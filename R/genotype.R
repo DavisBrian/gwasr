@@ -39,8 +39,8 @@
 #'   
 #' \itemize{
 #'  \item data data frame of the data for analysis 
-#'  \item AAC alternate allele count.
-#'  \item AAF alternate allele frequency. 
+#'  \item CAC calulated allele count.
+#'  \item CAF calulated allele frequency. 
 #'  \item gender column name containing the gender of the subjects
 #'  \item include the subjects in \code{data} that will be included is further analysis.
 #'  \item exclude the subjects in \code{data} that will be excluded is further analysis.    
@@ -69,22 +69,24 @@ genotype <- function(Z, subject.include = NULL, subject.exclude = NULL,
   
   # [TBD] - check for missing
     
-    subjects_all <- rownames(Z)
-    snps_all <- colnames(Z)
+#     subjects_all <- rownames(Z)
+#     snps_all <- colnames(Z)
     
-    data <- reduce_data(
-      Z,
-      row.include = subject.include,
-      row.exclude = subject.exclude,
-      col.include = snp.include,
-      col.exclude = snp.exclude
-    )
+    data <- Z
+    
+#     data <- reduce_data(
+#       Z,
+#       row.include = subject.include,
+#       row.exclude = subject.exclude,
+#       col.include = snp.include,
+#       col.exclude = snp.exclude
+#     )
     new_class <- class(data)
     
     structure(
       data,
-      AAC = colSums(data, na.rm = TRUE),
-      AAF = colMeans(data, na.rm = TRUE) / 2.0,
+      CAC = colSums(data, na.rm = TRUE),
+      CAF = colMeans(data, na.rm = TRUE) / 2.0,
       included = list(subjects = rownames(data), snps = colnames(data)),
       excluded = list(
         subjects = setdiff(rownames(Z), rownames(data)),
@@ -93,3 +95,36 @@ genotype <- function(Z, subject.include = NULL, subject.exclude = NULL,
       class = c("genotype", new_class)
     )
   }
+
+
+#' @rdname genotype
+#' @export
+is_genotype <- function(x) inherits(x, "genotype")
+
+# metadata  functions  --------------------------------------------------------
+
+# get functions
+#' @export
+get_subjects.genotype <- function(x, excluded=FALSE) {
+  stopifnot(length(excluded) == 1L)
+  if (excluded) {
+    attr(x, "excluded")[["subjects"]]  
+  } else {
+    intersect(attr(x, "included")[["subjects"]], rownames(x))
+  }
+}
+
+
+#' @export
+get_snps.genotype <- function(x, excluded=FALSE, ...) {
+  stopifnot(length(excluded) == 1L)
+  if (excluded) {
+    attr(x, "excluded")[["snps"]]  
+  } else {
+    intersect(attr(x, "included")[["snps"]], colnames(x))
+  }
+}
+
+
+
+
