@@ -65,7 +65,8 @@
 #  -add genderChar??? something to demote which character is "MALE/FEMALE"
 #  -add "family" (gaussian/binomial/survival)
 #  -add print method to show the meta data
-phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL, include=NULL, exclude=NULL) {
+phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL, 
+                      include=NULL, exclude=NULL) {
   
   if(is.data.frame(data)) {
     old_class <- class(data)
@@ -75,27 +76,32 @@ phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL, inc
   }
   
   # [TBD] check column names are in data
+  cols <- colnames(get_all_vars(formula, data))
   
   # [TBD] check formula
   #        - make sure all varaibles are in the data frame
   #        - make sure after na.omit there are rows
   #        - make sure a basic model.frame can be made ???
-  
+
   # [TBD] check family
   #        - if "gaussian" response is_numeric
   #        - if "binomial" response is_dicotomous
   #        - if "survival" ???
+  #        - make sure formula can be run with the family argument
   
   # [TBD] check check id
-  #        - if not given make the rownames a column
+  #        - if not given make the rownames a column (.id) and set idCol
   #        - make sure they are characters
   #        - make sure they are unique
   #        - set idCol
+  cols <- unique(c(cols, id))
+  subjects_all <- data[ , id]
   
   # [TBD] check check gender
   #        - is a type than can be grouped
   #        - has no more than 2 groups
   #        - can be converted to TRUE/FALSE??
+  cols <- unique(c(cols, gender))
   
   # [TBD] check check include
   #        - the subjects are in the dataset
@@ -104,31 +110,33 @@ phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL, inc
   #        - the subjects are in the dataset
   
   # include / exclude    
-  
+
   if (!is.null(include)) {
     subjects <- intersect(include, data[ , id])
-    data <- data[(data[ , id] %in% subjects), , drop=FALSE]
+    data <- data[(data[, id] %in% subjects), , drop = FALSE]
   }
   
   # exclude
   if (!is.null(exclude)) {
     subjects <- setdiff(data[ , id], exclude)
-    data <- data[(data[ , id] %in% subjects), , drop=FALSE]
+    data <- data[(data[, id] %in% subjects), , drop = FALSE]
   }
+  
+  data <- na.omit(data[ , cols])
   
   subjects_include <- data[ , id]
   
-  subjects_exclude <- setdiff(data[ , id], subjects_include)
+  subjects_exclude <- setdiff(subjects_all, subjects_include)
   if (length(subjects_exclude) == 0L) {
     subjects_exclude <- NULL
   }
   
-
   new_class <- class(data)
   
   structure(
     data,
     formula = formula,
+    family = family,
     idCol = id,
     genderCol = gender,
     included = subjects_include,
@@ -156,4 +164,15 @@ get_subjects.phenotype <- function(x, excluded = FALSE) {
   }
 }
 
+#' @export
+get_formula <- function(x) { attr(x, "formula") }
+
+#' @export
+get_family <- function(x) { attr(x, "family") }
+
+#' @export
+get_idCol <- function(x) { attr(x, "idCol") }
+
+#' @export
+get_genderCol <- function(x) { attr(x, "genderCol") }
 
