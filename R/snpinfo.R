@@ -139,3 +139,11 @@ get_aggregateBy <- function(x, ...) unique(x[[attr(x, "aggregateByCol")]])
 #' @export
 get_chr <- function(x, ...) unique(x[[attr(x, "chrCol")]])
 
+#' @export
+get_snpNamesCol <- function(x) attr(x, "snpNamesCol")
+
+#' @export
+get_aggregateByCol <- function(x) attr(x, "aggregateByCol")
+
+
+
