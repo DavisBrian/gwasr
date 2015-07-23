@@ -16,7 +16,7 @@ gwasr is currently not on CRAN, but you can get it from github with:
 devtools::install_github("DavisBrian/gwasr")
 ```
 
-## Examples
+## Usage / Examples
 
 The following example uses gwasr to solve a fairly realistic problem: With phenotype, genotype, and a snpinfo file for each "gene", run a T5 test.
 

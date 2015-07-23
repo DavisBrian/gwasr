@@ -65,6 +65,7 @@
 #  -add genderChar??? something to demote which character is "MALE/FEMALE"
 #  -add "family" (gaussian/binomial/survival)
 #  -add print method to show the meta data
+#  -add "problems" (a la readr)
 phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL, 
                       include=NULL, exclude=NULL) {
   

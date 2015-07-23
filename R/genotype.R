@@ -47,12 +47,12 @@
 #' }
 #' 
 #' It is important to note that return \code{include} and \code{exclude} are taken from data and not from the input parameters. 
-
 #' @export
 #
 # [TBD]
 #  - sparse matrix
 #  - model type (additive, etc) support
+#  -add "problems" (a la readr)
 genotype <- function(Z, subject.include = NULL, subject.exclude = NULL, 
                      snp.include = NULL, snp.exclude = NULL) {
   

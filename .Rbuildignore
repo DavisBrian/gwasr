@@ -5,3 +5,4 @@
 ^README.Rmd$
 ^NEWS.md$
 ^cran-comments\.md$
+^example.R$

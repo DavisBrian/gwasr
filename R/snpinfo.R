@@ -53,6 +53,9 @@
 #' It is important to note that return \code{include} and \code{exclude} are taken from data and not from the input parameters. 
 #'   
 #' @export
+#
+# [TBD]
+#  -add "problems" (a la readr)
 snpinfo <- function(data, snpNames="Name", aggregateBy="gene", chr=NULL, pos=NULL, ref=NULL, alt=NULL, filterBy=NULL, filterFun=NULL, otherCols=NULL) {
   
   if (is.data.frame(data)) {
@@ -145,5 +148,7 @@ get_snpNamesCol <- function(x) attr(x, "snpNamesCol")
 #' @export
 get_aggregateByCol <- function(x) attr(x, "aggregateByCol")
 
+#' @export
+get_chrcol <- function(x) attr(x, "chrCol")
 
 
