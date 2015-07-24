@@ -39,8 +39,8 @@
 #'   
 #' \itemize{
 #'  \item data data frame of the data for analysis 
-#'  \item CAC calulated allele count.
-#'  \item CAF calulated allele frequency. 
+#'  \item AAC alternate allele count.
+#'  \item AAF alternate allele frequency. 
 #'  \item gender column name containing the gender of the subjects
 #'  \item include the subjects in \code{data} that will be included is further analysis.
 #'  \item exclude the subjects in \code{data} that will be excluded is further analysis.    
@@ -85,8 +85,8 @@ genotype <- function(Z, subject.include = NULL, subject.exclude = NULL,
     
     structure(
       data,
-      CAC = colSums(data, na.rm = TRUE),
-      CAF = colMeans(data, na.rm = TRUE) / 2.0,
+      AAC = colSums(data, na.rm = TRUE),
+      AAF = colMeans(data, na.rm = TRUE) / 2.0,
       included = list(subjects = rownames(data), snps = colnames(data)),
       excluded = list(
         subjects = setdiff(rownames(Z), rownames(data)),
@@ -101,9 +101,9 @@ genotype <- function(Z, subject.include = NULL, subject.exclude = NULL,
 #' @export
 is_genotype <- function(x) inherits(x, "genotype")
 
-# metadata  functions  --------------------------------------------------------
 
-# get functions
+# get functions  ---------------------------------------------------------------
+
 #' @export
 get_subjects.genotype <- function(x, excluded=FALSE) {
   stopifnot(length(excluded) == 1L)
@@ -126,5 +126,36 @@ get_snps.genotype <- function(x, excluded=FALSE, ...) {
 }
 
 
+# single verbs -----------------------------------------------------------------
+
+#' @export
+reduce.genotype <- function(g, common) {
+  
+  # subjects
+  subjects_dropped <- setdiff(get_subjects(g), common$subjects)
+  if (length(subjects_dropped) == 0L) {
+    subjects_dropped <- NA
+  } 
+  o_subjects <- match(common$subjects, rownames(g))
+  
+  # snps
+  snps_dropped <- setdiff(get_snps(g), common$snps)
+  if (length(snps_dropped) == 0L) {
+    snps_dropped <- NA
+  } 
+  o_snps <- match(common$snps, colnames(g))
+  
+  data <- g[o_subjects, o_snps]
+ 
+  structure(
+    data,
+    AAC = colSums(data, na.rm = TRUE),
+    AAF = colMeans(data, na.rm = TRUE) / 2.0,
+    included = attr(g, "included"),
+    excluded = attr(g, "excluded"),
+    dropped = list(subjects = subjects_dropped, snps = snps_dropped),
+    class = class(g)
+  )
+}
 
 
