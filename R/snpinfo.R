@@ -130,9 +130,8 @@ snpinfo <- function(data, snpNames="Name", aggregateBy="gene", chr=NULL, pos=NUL
 #' @export
 is_snpinfo <- function(x) inherits(x, "snpinfo")
 
-# metadata  functions  --------------------------------------------------------
+# get functions  ---------------------------------------------------------------
 
-# get functions
 #' @export
 get_snps.snpinfo <- function(x, ...) unique(x[[attr(x, "snpNamesCol")]])
 
@@ -152,3 +151,15 @@ get_aggregateByCol <- function(x) attr(x, "aggregateByCol")
 get_chrcol <- function(x) attr(x, "chrCol")
 
 
+# single verbs -----------------------------------------------------------------
+
+reduce.snpinfo <- function(s, common, reduceToCol) {
+  
+  # [TBD] - check reduceToCol exsists in s
+  # [TBD] - reduce by gene list
+  
+  # reduce the snpinfo file to just the chromosome we have snps for
+  r2 <- unique(s[get_snps(s) %in% common$snps , reduceToCol])
+  
+  s[s[[reduceToCol]] %in% r2, ]
+}

@@ -142,7 +142,7 @@ phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL,
     genderCol = gender,
     included = subjects_include,
     excluded = subjects_exclude,
-    class = c("phenotype", new_class)
+    class = unique(c("phenotype", new_class))
   )
 }
 
@@ -150,10 +150,8 @@ phenotype <- function(data, formula=NULL, family=NULL, id=NULL, gender=NULL,
 #' @export
 is_phenotype <- function(x) inherits(x, "phenotype")
 
+# get functions  ---------------------------------------------------------------
 
-# metadata  functions  --------------------------------------------------------
-
-# get functions
 #' @export
 get_subjects.phenotype <- function(x, excluded = FALSE) {
   # [TBD] check exlude is  a logical of length 1
@@ -177,3 +175,25 @@ get_idCol <- function(x) { attr(x, "idCol") }
 #' @export
 get_genderCol <- function(x) { attr(x, "genderCol") }
 
+#' @export
+get_included <- function(x) { attr(x, "included") }
+
+#' @export
+get_excluded <- function(x) { attr(x, "excluded") }
+
+
+# single verbs -----------------------------------------------------------------
+
+#' @export
+reduce.phenotype <- function(p, common) {
+  
+  dropped <- setdiff(get_subjects(p), common$subjects)
+  if (length(dropped) == 0L) {
+    attr(p, "dropped") <- NA
+  } else {
+    attr(p, "dropped") <- dropped
+  }
+  
+  o <- match(common$subjects, p[ , get_idCol(p)])
+  p[o, ]
+}
