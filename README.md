@@ -16,10 +16,6 @@ back together.
 Effort has been put into making `gwasr` fast and memory efficient.  
 
 
-
-**This package is still under active development. The APIs may be unstable.**
-
-
 ## Installation
 
 `gwasr` is currently not on CRAN, but you can get it from github with:
@@ -45,11 +41,9 @@ The key objects in gwasr are:
 
 ## Single Object Verbs
 
- * reduce
+ * summary
 
 ## Multi Object Verbs
-
- * create_dataset
 
 
 ## Usage / Examples
@@ -60,5 +54,3 @@ The following example uses `gwasr` to solve a fairly realistic problem: With phe
 
 
 ## Future plans
-
-
