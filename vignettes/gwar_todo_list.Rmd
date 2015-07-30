@@ -1,0 +1,95 @@
+---
+title: "Pipeline Todo List"
+author: "Brian Davis"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Basic Todo list of ideas for the analysis pipeline.
+
+# phenotype
+
+ * create a phenotype class
+    * drop unwanted / unneeded columns
+ * improved error checking
+ * summary function
+ * print (similar to data_frame)
+ 
+# genotype
+
+ * create a genotype class
+ * improved error checking
+ * summary function
+ * "split" by gene (similar to dplyr with attributes)
+ * print (similar to data_frame)
+ * option to store genotype in sparse matrix format
+
+# snpinfo
+ * create a genotype class
+    * drop unwanted / unneeded columns
+ * improved error checking
+ * summary function
+ * print (similar to data_frame)
+ 
+# gwas_list
+ * create gwas_list
+    * reduce down to common data
+    * warning / stop if nothing in common
+ * summary function
+ * print (similar to data_frame)
+    * number of subjects (first x)
+    * number of snps (first x)
+    * number of "genes" (first x)
+    * number of "chromosomes" (first x)
+    * print(pheno)
+    * print(geno)
+    * print(snpinfo)
+ * subsetting (see multitable - Extract.R, mefa, mefa4)
+    * [subjects, snps, silevel]
+    * `[[ subject/snp/aggregateBy/chr/snpName ==
+ * get_phenotype
+ * get_snpinfo
+ * get_genotype
+ * get_kinship
+ * get_phenotype_attributes
+ * get_snpinfo_attributes
+ * get_genotype_attributes
+ * get_kinship_attributes
+ * option to store genotype in sparse matrix format
+ * str.gwas.list <- function(object, give.attr = FALSE, hide.internals = TRUE, ...){
+
+# Apply function for gwas_dataset
+ * function(X, MARGIN, FUN, ...) {
+
+# reporting
+
+ * compare p-values of test (facet for > 2 test ???)
+ * manhattan plot of p-values
+ * summary of inputs / run
+ * results to xlsx
+ 
+
+# misc
+
+# single object functions
+
+ * summary
+ * print
+ * subsetting
+ 
+
+# multi object functions
+
+ * intersect phenotype, genotype, snpinfo into a data set to run tests on.
+ * gene lookup (return just pheno, geno, snpinfo of that gene)
+ * seqMeta parts (score, cov, maf, etc )
+ * test <- function(geno, snpinfo, pheno, silevel, fun=, args=)???
+ 
+ 
+# test
+
+ * gwasrlm with weights
+ * burden test (create a wrapper function fo Tx, MB)
+ * skat
+ * permutation based results
+ * Firth (speed up???)
