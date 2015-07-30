@@ -56,6 +56,7 @@
 #
 # [TBD]
 #  -add "problems" (a la readr)
+# [TBD] - pre-break up based on aggregateBy and chrCol
 snpinfo <- function(data, snpNames="Name", aggregateBy="gene", chr=NULL, pos=NULL, ref=NULL, alt=NULL, filterBy=NULL, filterFun=NULL, otherCols=NULL) {
   
   if (is.data.frame(data)) {
