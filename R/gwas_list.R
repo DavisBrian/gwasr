@@ -11,5 +11,3 @@ gwas_list <- function(geno, pheno, snpi) {
     )
 }
 
-# [TBD] - pre-break up (snpinfo and geno) based on aggregateBy and chrCol
-# [TBD] - pre-break up (sgeno) based on aggregateBy

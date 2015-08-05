@@ -14,8 +14,7 @@ Basic Todo list of ideas for the analysis pipeline.
  * improved error checking
  * summary function
  * print (similar to data_frame)
- * as.phenotype.gwas_list
- 
+
 # genotype
 
  * create a genotype class
@@ -24,7 +23,7 @@ Basic Todo list of ideas for the analysis pipeline.
  * "split" by gene (similar to dplyr with attributes)
  * print (similar to data_frame)
  * option to store genotype in sparse matrix format
- * as.genotype.gwas_list
+
 
 # snpinfo
  * create a genotype class
@@ -32,7 +31,7 @@ Basic Todo list of ideas for the analysis pipeline.
  * improved error checking
  * summary function
  * print (similar to data_frame)
- * as.snpinfo.gwas_list
+
  
 # gwas_list
  * create gwas_list
