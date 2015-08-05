@@ -7,6 +7,35 @@ output: html_document
 
 Basic Todo list of ideas for the analysis pipeline.
 
+# Basic Pipeline procedure
+
+ * create a phenotype object (basic error checking)
+ * create a snpinfo class (basic error checking)
+ * create a genotype class (basic error checking)
+ * create a gwas_list (reduce pheno/geno/snpinfo into a common minimal data set)
+ * create a standard output structure (not part of the package)
+ * run arbitrary test
+    * seqMeta
+      * create a prepScores object
+      * run T1/T5/Skat/etc
+    * gwaslm
+    * firth
+ * create reports
+    * results tables
+    * qq plots
+    * manhattan plots
+    * compare tests
+ * ideas
+    * for a gwas_list run an arbitrary function on each "gene" (do??)
+    * tidyr / dplyr concepts
+ * functions
+    * gwaslm
+    * maf
+    * impute(x, type="mean")
+    * cov
+    * score
+    * SEE seqMeta function
+
 # phenotype
 
  * create a phenotype class
@@ -14,6 +43,7 @@ Basic Todo list of ideas for the analysis pipeline.
  * improved error checking
  * summary function
  * print (similar to data_frame)
+ * data_frame support
 
 # genotype
 
@@ -31,6 +61,7 @@ Basic Todo list of ideas for the analysis pipeline.
  * improved error checking
  * summary function
  * print (similar to data_frame)
+ * data_frame support
 
  
 # gwas_list
